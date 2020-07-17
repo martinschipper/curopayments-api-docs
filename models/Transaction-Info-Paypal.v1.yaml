@@ -1,0 +1,18 @@
+title: Transaction-Info-Paypal
+type: object
+properties:
+  token:
+    type: string
+    description: Unique transaction ID (Token)
+  first_name:
+    type: string
+    description: Consumer’s first name
+  last_name:
+    type: string
+    description: Consumer’s last name
+  email:
+    type: string
+    description: Consumer’s email-address
+  country_id:
+    type: string
+    description: Country Code

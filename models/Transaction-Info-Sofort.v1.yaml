@@ -1,0 +1,24 @@
+title: Transaction-Info-Sofort
+type: object
+properties:
+  reference:
+    type: integer
+    description: Reference from Sofort
+  description:
+    type: string
+    description: Your own description
+  consumer_name:
+    type: string
+    description: Consumer’s first and last name combined
+  consumer_iban:
+    type: string
+    description: Account IBAN number
+  consumer_bic:
+    type: string
+    description: Account BIC Code
+  bank_code:
+    type: integer
+    description: Bank Code
+  book_date:
+    type: string
+    description: Book date of the transaction

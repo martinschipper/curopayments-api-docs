@@ -1,0 +1,49 @@
+title: consomer
+type: object
+properties:
+  firstname:
+    type: string
+  lastname:
+    type: string
+  name:
+    type: string
+  company:
+    type: string
+  address:
+    type: string
+  street:
+    type: string
+  housenumber:
+    type: string
+  city:
+    type: string
+  zipcode:
+    type: string
+  country_id:
+    type: string
+  phone:
+    type: string
+  email:
+    type: string
+  shipto_firstname:
+    type: string
+  shipto_initials:
+    type: string
+  shipto_lastname:
+    type: string
+  shipto_gender:
+    type: string
+  shipto_dob:
+    type: string
+  shipto_company:
+    type: string
+  shipto_address:
+    type: string
+  shipto_city:
+    type: string
+  shipto_state:
+    type: string
+  shipto_zipcode:
+    type: string
+  shipto_country_id:
+    type: string

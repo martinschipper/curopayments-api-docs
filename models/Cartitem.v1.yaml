@@ -1,0 +1,26 @@
+title: cartitem
+type: object
+properties:
+  quantity:
+    type: integer
+  sku:
+    type: string
+  name:
+    type: string
+  price:
+    type: integer
+  vat:
+    type: number
+  vat_amount:
+    type: integer
+  vat_inc:
+    type: boolean
+  type:
+    type: integer
+  stock:
+    type: integer
+required:
+  - sku
+  - name
+  - price
+  - vat

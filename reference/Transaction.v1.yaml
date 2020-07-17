@@ -1,0 +1,463 @@
+openapi: 3.0.0
+info:
+  title: Transaction API
+  version: '1.0'
+  contact:
+    name: CURO Payments
+    url: www.curopayments.com
+    email: info@curopayments.com
+  termsOfService: 'https://www.curopayments.com/voorwaarden.pdf'
+  description: Transaction functions
+tags:
+  - name: transaction
+    description: Transaction actions
+servers:
+  - url: 'https://secure-staging.curopayments.net'
+    description: Secure Staging
+paths:
+  '/rest/v1/curo/transaction/{transaction_id}':
+    parameters:
+      - schema:
+          type: string
+        name: transaction_id
+        in: path
+        required: true
+    get:
+      summary: Get transaction details
+      tags:
+        - transaction
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: ../models/Transaction.v1.yaml
+              examples:
+                Example:
+                  value:
+                    success: true
+                    transaction:
+                      merchant_id: '1066'
+                      site_id: '1066'
+                      site_name: 'Website #1'
+                      code: '200'
+                      country_id: NL
+                      currency_id: EUR
+                      amount: '3500'
+                      reference: Order 64|25
+                      parent_transaction_id: null
+                      payment_type_id: '18'
+                      payment_type: iDEAL
+                      option: idealpro
+                      type: '1'
+                      description: Order 64|25
+                      info:
+                        issuer: Issuer Simulation V3 - RABO
+                        ideal_ref: null
+                        consumer_name: Hr H Krekel en/of MW M.J. Krekel
+                        consumer_iban: NL17RABO0121121121
+                        consumer_bic: RABONL2U
+                      testmode: '1'
+                      ip: 12.12.12.12
+                      registered: '2020-07-15 16:43:35'
+                      updated: '2020-07-15 16:43:35'
+                      finished: '2020-07-15 16:43:40'
+                      consumer:
+                        name: Henkie Krekel
+                        firstname: Henkie
+                        lastname: Krekel
+                        email: henkie@curopayments.com
+                        address: Obrechtstraat 21
+                        street: Obrechtstraat
+                        housenumber: '21'
+                        city: Oss
+                        zipcode: 5344 AT
+                        country_id: NL
+                        phone: '0123456789'
+                        shipto_name: Henkie Krekel
+                        shipto_firstname: Henkie
+                        shipto_lastname: Krekel
+                        shipto_address: Obrechtstraat 21
+                        shipto_street: Obrechtstraat
+                        shipto_housenumber: '21'
+                        shipto_city: Oss
+                        shipto_zipcode: 5344 AT
+                        shipto_country_id: NL
+                        account_name: Hr H Krekel en/of MW M.J. Krekel
+                        account_number: NL17RABO0121121121
+                        account_code: RABONL2U
+                      payouts:
+                        - payout_type_id: '30'
+                          type_description: SMS fee
+                          currency: EUR
+                          amount: '-18.00'
+                          due_date: '2020-07-15'
+                          invoice_number: null
+                          invoice_date: null
+                      can_refund: true
+                      refund_remainder: 3500
+                      refund_extra_limit: 0
+                      id: T20747812753
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      transaction:
+                        $ref: ../models/Transaction.v1.yaml
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: get-rest-v1-curo-transaction-transaction_id
+      parameters:
+        - schema:
+            $ref: ../models/Accept-Header.v1.yaml
+          in: header
+          name: Accept
+          description: Request/Response-type
+      description: |-
+        To verify whether a transaction was successful you need to send a transaction detail GET request to the API.
+
+        This can be done after the return of the consumer to the merchant’s website (after the redirect from the payment method), or after a specified amount of time (for example 5 or 10 minutes from starting of payment transaction).
+
+        * To avoid unnecessary system load it is recommended not to repeat the status request every minute, and to minimize the status request after a certain period of time.
+
+        * Reminder: It is highly recommended to use the Callback option via url_callback. You can pass it dynamically for each transaction or enter a fixed URL in the Merchant Backoffice. The URL will automatically receive transaction status updates so you don't need to setup a custom status request procedure.
+  /rest/v1/curo/capture:
+    parameters: []
+    post:
+      summary: Capture transaction
+      operationId: post-rest-v1-curo-capture
+      responses:
+        '200':
+          description: OK
+      description: A previously authorized transaction can be captured by using this entry point if the action is supported by the paymentmethod.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                description:
+                  type: string
+              required:
+                - transaction_id
+      parameters:
+        - schema:
+            $ref: ../models/Accept-Header.v1.yaml
+          in: header
+          name: Accept
+          description: Request/Response-type
+      tags:
+        - transaction
+  /rest/v1/curo/cancel:
+    post:
+      summary: Cancel transaction
+      operationId: post-rest-v1-curo-cancel
+      responses:
+        '200':
+          description: OK
+      description: 'A transaction can be cancelled in the back-office, or by using this entry point.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                description:
+                  type: string
+              required:
+                - transaction_id
+          application/xml:
+            schema:
+              type: object
+              properties:
+                request:
+                  type: object
+                  required:
+                    - transaction_id
+                  properties:
+                    transaction_id:
+                      type: string
+                    description:
+                      type: string
+              required:
+                - request
+        description: ''
+      parameters:
+        - schema:
+            $ref: ../models/Accept-Header.v1.yaml
+          in: header
+          name: Accept
+          description: Request/Response-type
+      security:
+        - Authorization: []
+      tags:
+        - transaction
+  /rest/v1/curo/recurring:
+    post:
+      summary: Recurring transaction
+      operationId: post-rest-v1-curo-recurring
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction-recurring-response'
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  request:
+                    $ref: '#/components/schemas/transaction-recurring-request'
+      description: |-
+        Recurring payments for this method will use SEPA Direct Debit transactions using the initial transaction id as mandate.
+
+        Notes:
+        * The recurring option must be requested and approved per website before it can be used, please contact your accountmanager for further details.
+        * Consumers must be informed about recurring payments when making the initial/authorizing payment in compliance with the rules of a SEPA Direct Debit transfer as agreed by all European banks!
+      parameters:
+        - schema:
+            $ref: ../models/Accept-Header.v1.yaml
+          in: header
+          name: Accept
+          description: Request/Response-type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction-recurring-request'
+          application/xml:
+            schema:
+              type: object
+              properties:
+                request:
+                  $ref: '#/components/schemas/transaction-recurring-request'
+      tags:
+        - transaction
+  /rest/v1/curo/refund:
+    post:
+      summary: Refund transaction
+      operationId: post-rest-v1-curo-refund
+      responses:
+        '200':
+          description: OK
+      description: |-
+        The Refund operation must be done using the Transaction ID of a succesfully completed transaction.
+
+        The Refund operation, as its name states, consists of returning the money already collected by a Payment or a Capture transaction. The amount collected can be refunded in total or partially. You cannot refund amounts bigger than the one sent in the original transaction.
+
+        * You can perform multiple refunds until you reach the total amount of the original Payment and your balance in the system is sufficient.
+        * A refund will be done via a SEPA Credit Transfer to the account information provided by the issuing bank. It is not possible to refund to other accounts.
+        * Refunds can be bounced by the receiving bank in case of restrictions on the receiving account (i.e. Depot or Savings accounts).
+        * Created refunds will be "Pending" (code=0) until they are collected and processed at 05:30 (Europe/Amsterdam), before that time a refund can be still be cancelled.
+      parameters:
+        - schema:
+            $ref: ../models/Accept-Header.v1.yaml
+          in: header
+          name: Accept
+          description: Request/Response-type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                amount:
+                  type: integer
+                description:
+                  type: string
+              required:
+                - transaction_id
+                - amount
+          application/xml:
+            schema:
+              type: object
+              properties:
+                request:
+                  type: object
+                  required:
+                    - transaction_id
+                    - amount
+                  properties:
+                    transaction_id:
+                      type: string
+                    amount:
+                      type: integer
+                    description:
+                      type: string
+              required:
+                - request
+      tags:
+        - transaction
+  '/rest/v1/curo/paymenttypes/{site_id}':
+    parameters:
+      - schema:
+          type: string
+        name: site_id
+        in: path
+        required: true
+    get:
+      summary: List enabled paymenttypes
+      tags:
+        - transaction
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  options:
+                    type: object
+                    properties:
+                      '{pt_id}':
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+              examples:
+                Example:
+                  value:
+                    success: true
+                    options:
+                      '4':
+                        id: banktransfer
+                        name: Bank transfer
+                      '10':
+                        id: creditcard
+                        name: Creditcard
+                      '13':
+                        id: giropay
+                        name: GiroPay
+                      '18':
+                        id: ideal
+                        name: iDEAL
+                      '19':
+                        id: klarna
+                        name: Klarna
+                      '26':
+                        id: sofortbanking
+                        name: SofortBanking
+                      '30':
+                        id: mistercash
+                        name: Bancontact
+                      '60':
+                        id: afterpay
+                        name: AfterPay
+                      '61':
+                        id: directdebit
+                        name: DirectDebit
+                      '66':
+                        id: bitcoin
+                        name: Bitcoin
+                      '73':
+                        id: idealqr
+                        name: iDEAL QR
+                      '79':
+                        id: onlineueberweisen
+                        name: OnlineÜberweisen
+      operationId: get-rest-v1-curo-paymenttypes-site_id
+      description: 'The /rest/v1/curo/paymenttypes/site-id/ entry point lets you retrieve a list of enabled payment methods for the specified site. '
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Accept
+      security:
+        - Authorization: []
+components:
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+  schemas:
+    transaction-recurring-request:
+      title: transaction-recurring-request
+      type: object
+      properties:
+        transaction_id:
+          type: string
+        reference:
+          type: string
+        amount:
+          type: integer
+        currency_id:
+          type: string
+        description:
+          type: string
+        ip:
+          type: string
+      required:
+        - transaction_id
+        - reference
+        - amount
+        - currency_id
+        - description
+      description: ''
+    transaction-recurring-response:
+      title: transaction-recurring-response
+      type: object
+      properties:
+        pmdata:
+          type: object
+          properties:
+            receipient_name:
+              type: string
+            receipient_iban:
+              type: string
+            receipient_bic:
+              type: string
+            receipient_identifier:
+              type: string
+            amount:
+              type: string
+            currency_id:
+              type: string
+            mandate_id:
+              type: string
+            mandate_date:
+              type: string
+            description:
+              type: string
+            execute_date:
+              type: string
+            sequence_type:
+              type: string
+            name:
+              type: string
+            iban:
+              type: string
+            bic:
+              type: string
+        transaction_id:
+          type: string
+      description: ''
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: basic
+      description: ''
+security:
+  - Authorization: []

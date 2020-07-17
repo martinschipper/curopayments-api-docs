@@ -1,0 +1,55 @@
+title: transaction
+type: object
+properties:
+  id:
+    type: string
+  merchant_id:
+    type: integer
+  site_id:
+    type: integer
+  site_name:
+    type: string
+  code:
+    type: integer
+  country_id:
+    type: string
+  currency_id:
+    type: string
+  amount:
+    type: integer
+  reference:
+    type: string
+  parent_transaction_id:
+    type: string
+  payment_type_id:
+    type: integer
+  payment_type:
+    type: string
+  type:
+    type: string
+  description:
+    type: string
+  status:
+    type: integer
+  timestamp:
+    type: integer
+  consumer:
+    $ref: ./Consumer.v1.yaml
+  info:
+    type: object
+    properties:
+      cardnumber_masked:
+        type: string
+        description: If applicable
+      reference:
+        type: string
+      consumer_name:
+        type: string
+      consumer_iban:
+        type: string
+      consumer_bic:
+        type: string
+      book_date:
+        type: string
+      '':
+        type: string

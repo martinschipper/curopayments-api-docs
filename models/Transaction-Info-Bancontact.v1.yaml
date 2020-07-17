@@ -1,0 +1,6 @@
+title: Transaction-Info-Bancontact
+type: object
+properties:
+  cardnumber_masked:
+    type: string
+    description: Card number (masked)

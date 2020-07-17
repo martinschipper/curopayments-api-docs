@@ -1,0 +1,21 @@
+title: Transaction-Info-Przelewy24
+type: object
+properties:
+  error_code:
+    type: integer
+    description: 'Error code, where 0 is OK and else it''s the error code'
+  error_messages:
+    type: string
+    description: Short description of the error
+  token:
+    type: string
+    description: Unique transaction ID (Token)
+  email:
+    type: string
+    description: Consumer’s email-address
+  order_id:
+    type: string
+    description: Transaction number received from Przelewy24
+  method:
+    type: integer
+    description: Payment method ID used by the Client
