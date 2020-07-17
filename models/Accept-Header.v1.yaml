@@ -2,8 +2,6 @@ type: string
 title: Accept Header
 description: HTTP Accept Header
 x-examples:
-  XML:
-    Accept: application/xml
-  Json:
-    Accept: application/json
+  XML: application/xml
+  Json: application/json
 default: application/json

@@ -379,9 +379,10 @@ paths:
       description: 'The /rest/v1/curo/paymenttypes/site-id/ entry point lets you retrieve a list of enabled payment methods for the specified site. '
       parameters:
         - schema:
-            type: string
+            $ref: ../models/Accept-Header.v1.yaml
           in: header
           name: Accept
+          description: Request/Response-type
       security:
         - Authorization: []
 components:
