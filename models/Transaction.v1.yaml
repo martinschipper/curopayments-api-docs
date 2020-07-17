@@ -1,6 +1,10 @@
 title: Transaction model
 type: object
-description: "This section provides reference information about payment transactions.  \n\nEvery payment request in the API will generate a new Transaction.  \nEach Transaction is uniquely identified by a CURO Transaction ID (transaction_id): `TYYM12345678`.  \n\n> \n`T` from \"Transaction\".  \n`YY` year number.  \n`M` month as hexadecimal (1-9, A=10, B=11, C=12).  \n`12345678` 8 digit unique number.  \nThe total length is always 12 characters\n\nYou are required to provide a Transaction Reference (reference) to indentify this transaction in your own system.\n\nPlease see Transaction Flow for a schematic overview of the standard transaction processing.\n\nTransactions can have several status codes during its lifetime, the complete list of Status Codes is shown below.\nA Transaction is considered to be “Completed” (final) if the status code is in the 2XX range (200 or 210 mostly)."
+description: 
+  "This section provides reference information about payment transactions.  \n\n
+  Every payment request in the API will generate a new Transaction.  \n
+  Each Transaction is uniquely identified by a CURO Transaction ID (transaction_id): `TYYM12345678`.  \n\n
+  > \n`T` from \"Transaction\".  \n`YY` year number.\n`M` month as hexadecimal (1-9, A=10, B=11, C=12).  \n`12345678` 8 digit unique number.  \nThe total length is always 12 characters\n\nYou are required to provide a Transaction Reference (reference) to indentify this transaction in your own system.\n\nPlease see Transaction Flow for a schematic overview of the standard transaction processing.\n\nTransactions can have several status codes during its lifetime, the complete list of Status Codes is shown below.\nA Transaction is considered to be “Completed” (final) if the status code is in the 2XX range (200 or 210 mostly)."
 properties:
   id:
     type: string
