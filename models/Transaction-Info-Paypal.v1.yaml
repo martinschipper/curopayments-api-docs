@@ -1,4 +1,4 @@
-title: Transaction-Info-Paypal
+title: Transaction Info - Paypal
 type: object
 properties:
   token:

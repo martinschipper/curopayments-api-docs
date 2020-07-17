@@ -1,4 +1,4 @@
-title: Transaction-Info-Sofort
+title: Transaction Info - Sofort
 type: object
 properties:
   reference:

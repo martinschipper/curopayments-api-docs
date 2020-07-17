@@ -1,4 +1,4 @@
-title: cartitem
+title: CartItem model
 type: object
 properties:
   quantity:
@@ -24,3 +24,4 @@ required:
   - name
   - price
   - vat
+description: ''

@@ -1,4 +1,4 @@
-title: Transaction-Info-Directdebit
+title: Transaction Info - Directdebit
 type: object
 properties:
   mandate_id:

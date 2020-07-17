@@ -1,4 +1,4 @@
-title: Transaction-Info-Banktransfer
+title: Transaction Info - Banktransfer
 type: object
 properties:
   reference:

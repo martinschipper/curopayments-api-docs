@@ -1,4 +1,4 @@
-title: consomer
+title: Consumer model
 type: object
 properties:
   firstname:
@@ -47,3 +47,4 @@ properties:
     type: string
   shipto_country_id:
     type: string
+description: ''

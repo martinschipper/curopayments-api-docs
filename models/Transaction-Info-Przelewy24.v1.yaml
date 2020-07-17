@@ -1,9 +1,9 @@
-title: Transaction-Info-Przelewy24
+title: Transaction Info - Przelewy24
 type: object
 properties:
   error_code:
     type: integer
-    description: 'Error code, where 0 is OK and else it''s the error code'
+    description: "Error code, where 0 is OK and else it's the error code"
   error_messages:
     type: string
     description: Short description of the error

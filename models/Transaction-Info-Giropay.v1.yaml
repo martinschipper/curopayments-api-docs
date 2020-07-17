@@ -1,4 +1,4 @@
-title: Transaction-Info-Giropay
+title: Transaction Info - Giropay
 type: object
 properties:
   giropay_code:
