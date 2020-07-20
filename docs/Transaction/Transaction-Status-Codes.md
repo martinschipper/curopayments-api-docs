@@ -14,7 +14,7 @@ The global status code ranges are:
 
 Code Range | Description
 ---------|----------
-`0` | Pending; waiting for acquirer.
+`0` | Pending; waiting for acquirer or customer.
 `1XX` | Authorisation phase 1 codes (credit card).
 `2XX` | Transaction completed successfully.
 `3XX` | Transaction failed.

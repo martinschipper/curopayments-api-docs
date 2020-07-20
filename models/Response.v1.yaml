@@ -1,0 +1,25 @@
+title: Response
+type: object
+description: 'See [Response Documentation](../../docs/Curopayments+API/Responses.md)'
+x-examples:
+  JSON succesful payment-request response:
+    payment:
+      action: redirect
+      external: true
+      url: 'http://www.example.com/pending.html?status=pending&transaction=T1234567890&code=701&reference=Reference+1'
+      transaction_id: T1234567890
+      testmode: 1
+    success: true
+properties:
+  '{requestSpecific}':
+    type: object
+    description: 'General container for the resource (eg. payment, recurring, refund etc.)'
+  status:
+    type: boolean
+    description: '`true` or `false` indicating the result of the call'
+  code:
+    type: string
+    description: 'Error code. See [List of Error Codes](../../docs/)'
+  message:
+    type: string
+    description: Textual message indicating what went wrong in case the call was unsuccessful

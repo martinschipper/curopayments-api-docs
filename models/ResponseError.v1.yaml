@@ -1,0 +1,17 @@
+title: ResponseError
+type: object
+properties:
+  '{requestSpecific}':
+    type: object
+  error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+  success:
+    type: string
+  warning:
+    type: string
+description: 'See [Response Documentation](../../docs/Curopayments+API/Responses.md)'

@@ -2,5 +2,4 @@
 
 About CURO Payments
 
-CURO Payments is a financial institution certified by De Nederlandsche Bank and is fully licensed to provide worldwide payment solutions.\
-CURO Payments is also registered as a Payment Facilitator with Master Card and VISA.
+CURO Payments is a financial institution certified by De Nederlandsche Bank and is fully licensed to provide worldwide payment solutions.<nl/>CURO Payments is also registered as a Payment Facilitator with Master Card and VISA.
