@@ -1,10 +1,24 @@
 title: Transaction model
 type: object
-description: 
-  "This section provides reference information about payment transactions.  \n\n
-  Every payment request in the API will generate a new Transaction.  \n
-  Each Transaction is uniquely identified by a CURO Transaction ID (transaction_id): `TYYM12345678`.  \n\n
-  > \n`T` from \"Transaction\".  \n`YY` year number.\n`M` month as hexadecimal (1-9, A=10, B=11, C=12).  \n`12345678` 8 digit unique number.  \nThe total length is always 12 characters\n\nYou are required to provide a Transaction Reference (reference) to indentify this transaction in your own system.\n\nPlease see Transaction Flow for a schematic overview of the standard transaction processing.\n\nTransactions can have several status codes during its lifetime, the complete list of Status Codes is shown below.\nA Transaction is considered to be “Completed” (final) if the status code is in the 2XX range (200 or 210 mostly)."
+description: |-
+  This section provides reference information about payment transactions.  
+
+   Every payment request in the API will generate a new Transaction.  
+   Each Transaction is uniquely identified by a CURO Transaction ID (transaction_id): `TYYM12345678`.  
+
+   > 
+  `T` from "Transaction".  
+  `YY` year number.
+  `M` month as hexadecimal (1-9, A=10, B=11, C=12).  
+  `12345678` 8 digit unique number.  
+  The total length is always 12 characters
+
+  You are required to provide a Transaction Reference (reference) to indentify this transaction in your own system.
+
+  Please see Transaction Flow for a schematic overview of the standard transaction processing.
+
+  Transactions can have several status codes during its lifetime, the complete list of Status Codes is shown below.
+  A Transaction is considered to be “Completed” (final) if the status code is in the 2XX range (200 or 210 mostly).
 properties:
   id:
     type: string
@@ -61,3 +75,53 @@ properties:
         type: string
 x-tags:
   - transaction
+x-examples:
+  example-1:
+    id: string
+    merchant_id: 0
+    site_id: 0
+    site_name: string
+    code: 0
+    country_id: string
+    currency_id: string
+    amount: 0
+    reference: string
+    parent_transaction_id: string
+    payment_type_id: 0
+    payment_type: string
+    type: string
+    description: string
+    status: 0
+    timestamp: 0
+    consumer:
+      firstname: string
+      lastname: string
+      name: string
+      company: string
+      address: string
+      street: string
+      housenumber: string
+      city: string
+      zipcode: string
+      country_id: string
+      phone: string
+      email: string
+      shipto_firstname: string
+      shipto_initials: string
+      shipto_lastname: string
+      shipto_gender: string
+      shipto_dob: string
+      shipto_company: string
+      shipto_address: string
+      shipto_city: string
+      shipto_state: string
+      shipto_zipcode: string
+      shipto_country_id: string
+    info:
+      cardnumber_masked: string
+      reference: string
+      consumer_name: string
+      consumer_iban: string
+      consumer_bic: string
+      book_date: string
+      '': string

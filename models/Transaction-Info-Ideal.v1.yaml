@@ -16,3 +16,10 @@ properties:
   consumer_bic:
     type: string
     description: Account BIC Code
+x-examples:
+  example-1:
+    issuer: string
+    ideal_ref: string
+    consumer_name: string
+    consumer_iban: string
+    consumer_bic: string

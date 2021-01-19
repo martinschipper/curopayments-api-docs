@@ -41,16 +41,16 @@ paths:
                   value:
                     success: true
                     transaction:
-                      merchant_id: '1066'
-                      site_id: '1066'
+                      merchant_id: 1066
+                      site_id: 1066
                       site_name: 'Website #1'
-                      code: '200'
+                      code: 200
                       country_id: NL
                       currency_id: EUR
-                      amount: '3500'
+                      amount: 3500
                       reference: Order 64|25
-                      parent_transaction_id: null
-                      payment_type_id: '18'
+                      parent_transaction_id: ''
+                      payment_type_id: 18
                       payment_type: iDEAL
                       option: idealpro
                       type: '1'
@@ -375,6 +375,13 @@ paths:
                       '79':
                         id: onlineueberweisen
                         name: OnlineÜberweisen
+                example-2:
+                  value:
+                    success: true
+                    options:
+                      '{pt_id}':
+                        id: string
+                        name: string
       operationId: get-rest-v1-curo-paymenttypes-site_id
       description: 'The /rest/v1/curo/paymenttypes/site-id/ entry point lets you retrieve a list of enabled payment methods for the specified site. '
       parameters:
