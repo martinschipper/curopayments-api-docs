@@ -4,15 +4,20 @@ properties:
   token:
     type: string
     description: Unique transaction ID (Token)
+    maxLength: 32
   first_name:
     type: string
     description: Consumer’s first name
+    maxLength: 32
   last_name:
     type: string
     description: Consumer’s last name
+    maxLength: 32
   email:
     type: string
     description: Consumer’s email-address
+    maxLength: 32
   country_id:
     type: string
     description: Country Code
+    maxLength: 2
