@@ -1,50 +1,70 @@
 title: Consumer model
 type: object
+description: ''
 properties:
   firstname:
     type: string
+    maxLength: 32
   lastname:
     type: string
+    maxLength: 64
   name:
     type: string
   company:
     type: string
+    maxLength: 64
   address:
     type: string
+    maxLength: 128
   street:
     type: string
   housenumber:
     type: string
   city:
     type: string
+    maxLength: 128
   zipcode:
     type: string
+    maxLength: 16
   country_id:
     type: string
+    maxLength: 2
   phone:
     type: string
+    maxLength: 16
   email:
     type: string
+    maxLength: 64
   shipto_firstname:
     type: string
+    maxLength: 32
   shipto_initials:
     type: string
+    maxLength: 64
   shipto_lastname:
     type: string
+    maxLength: 64
   shipto_gender:
     type: string
+    maxLength: 64
   shipto_dob:
     type: string
+    maxLength: 64
   shipto_company:
     type: string
+    maxLength: 128
   shipto_address:
     type: string
+    maxLength: 128
   shipto_city:
     type: string
+    maxLength: 128
   shipto_state:
     type: string
+    maxLength: 32
   shipto_zipcode:
     type: string
+    maxLength: 16
   shipto_country_id:
     type: string
-description: ''
+    maxLength: 2

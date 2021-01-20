@@ -46,24 +46,30 @@ properties:
   quantity:
     type: integer
     description: Quantity **1** is used if no value is specified.
+    maximum: 5
   sku:
     type: string
     description: Article number/Stock Keeping Unit
+    maxLength: 64
   name:
     type: string
     description: Article name/description
+    maxLength: 64
   price:
     type: integer
     description: Article price per item **in cents**
+    maximum: 10
   vat:
     type: number
     description: VAT percentage
+    maximum: 10.2
   vat_amount:
     type: integer
     description: |-
       VAT amount included/excluded in the price per item **in cents**
 
       **NB** when this is omitted it will be calculated automatically, however for prices **excluding** VAT rounding errors may occur which will result in a transaction failure for Klarna or Afterpay!
+    maximum: 10
   vat_inc:
     type: boolean
     description: |-
@@ -79,12 +85,14 @@ properties:
       * **3** administrative costs `not used by Klarna`
       * **4** discounts
       * **5** handling costs
+    maximum: 1
   stock:
     type: integer
     description: |-
       Amount in stock for this article. Specify this to prevent auto-capture of an order if items are out of stock.
 
       **NB** you must completely omit this parameter if you don't want or need stock checking! Else the stock value might become **0** which will prevent auto-captures.
+    maximum: 5
 required:
   - sku
   - name
