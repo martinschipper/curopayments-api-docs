@@ -20,6 +20,8 @@ properties:
   code:
     type: string
     description: 'Error code. See [List of Error Codes](../../docs/)'
+    maxLength: 48
   message:
     type: string
     description: Textual message indicating what went wrong in case the call was unsuccessful
+    maxLength: 255
