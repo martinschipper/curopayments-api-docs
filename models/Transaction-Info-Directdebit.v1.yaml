@@ -4,27 +4,35 @@ properties:
   mandate_id:
     type: string
     maxLength: 12
+    description: Mandate id
   mandate_date:
     type: string
     maxLength: 10
+    description: Mandate date
   consumer_name:
     type: string
     maxLength: 32
+    description: Consumer’s first and last name combined.
   consumer_iban:
     type: string
     maxLength: 32
+    description: Account IBAN number.
   consumer_bic:
     type: string
     maxLength: 10
+    description: Account BIC Code.
   book_date:
     type: string
     maxLength: 10
+    description: Book date of the transaction.
   execute_date:
     type: string
     maxLength: 10
+    description: Execute date of the transaction to .
   sequence_type:
     type: string
     maxLength: 4
+    description: Sequence type.....
   recipient_name:
     type: string
     description: (Company) Name of the recipient

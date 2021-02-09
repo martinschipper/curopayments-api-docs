@@ -324,9 +324,7 @@ paths:
             schema:
               type: object
               properties: {}
-            examples:
-              example-1:
-                value: {}
+            examples: {}
   /rest/v1/curo/capture:
     parameters: []
     post:
@@ -344,8 +342,14 @@ paths:
               properties:
                 transaction_id:
                   type: string
+                  description: Transaction id to be cancelled.
+                  maxLength: 12
                 description:
                   type: string
+                  description: |-
+                    Optional description for the capture.
+                    NB This is not processed or used by a paymentmethod, just for the back-office.
+                  maxLength: 255
               required:
                 - transaction_id
       parameters:
@@ -372,8 +376,14 @@ paths:
               properties:
                 transaction_id:
                   type: string
+                  maxLength: 12
+                  description: Transaction id to be cancelled.
                 description:
                   type: string
+                  description: |-
+                    Optional description for the cancellation.
+                    NB This is not processed or used by a paymentmethod, just for the back-office.
+                  maxLength: 255
               required:
                 - transaction_id
           application/xml:
@@ -414,6 +424,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/transaction-recurring-response'
+              examples:
+                example-1:
+                  value:
+                    pmdata:
+                      recipient_name: string
+                      recipient_iban: string
+                      recipient_bic: string
+                      recipient_identifier: string
+                      amount: string
+                      currency_id: str
+                      mandate_id: string
+                      mandate_date: string
+                      description: string
+                      execute_date: string
+                      sequence_type: string
+                      name: string
+                      iban: string
+                      bic: string
+                    transaction_id: string
             application/xml:
               schema:
                 type: object
@@ -437,6 +466,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/transaction-recurring-request'
+            examples:
+              example-1:
+                value:
+                  transaction_id: string
+                  reference: string
+                  amount: 0
+                  currency_id: str
+                  description: string
+                  ip: string
           application/xml:
             schema:
               type: object
@@ -452,6 +490,21 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  refund:
+                    type: object
+                    properties:
+                      transaction_id:
+                        type: string
+              examples:
+                example-1:
+                  value:
+                    refund:
+                      transaction_id: T1234567890
       description: |-
         The Refund operation must be done using the Transaction ID of a succesfully completed transaction.
 
@@ -475,13 +528,25 @@ paths:
               properties:
                 transaction_id:
                   type: string
+                  description: Transaction ID that needs to be refunded.
+                  maxLength: 12
                 amount:
                   type: integer
+                  description: The amount payable in cents (with no decimal separator).
+                  maximum: 10
                 description:
                   type: string
+                  description: Reason why the transaction is being refunded.
+                  maxLength: 255
               required:
                 - transaction_id
                 - amount
+            examples:
+              example-1:
+                value:
+                  transaction_id: string
+                  amount: 0
+                  description: string
           application/xml:
             schema:
               type: object
@@ -509,6 +574,7 @@ paths:
         name: site_id
         in: path
         required: true
+        description: ID of the specified site.
     get:
       summary: List enabled paymenttypes
       tags:
@@ -521,12 +587,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  success:
-                    type: boolean
                   options:
                     type: object
                     properties:
-                      '{pt_id}':
+                      '{pt-id}':
                         type: object
                         properties:
                           id:
@@ -534,9 +598,8 @@ paths:
                           name:
                             type: string
               examples:
-                Example:
+                example-1:
                   value:
-                    success: true
                     options:
                       '4':
                         id: banktransfer
@@ -544,43 +607,25 @@ paths:
                       '10':
                         id: creditcard
                         name: Creditcard
-                      '13':
-                        id: giropay
-                        name: GiroPay
                       '18':
                         id: ideal
-                        name: iDEAL
+                        name: iDeal
                       '19':
                         id: klarna
                         name: Klarna
-                      '26':
-                        id: sofortbanking
-                        name: SofortBanking
-                      '30':
-                        id: mistercash
-                        name: Bancontact
+                      '39':
+                        id: paypal
+                        name: PayPal
+                      '40':
+                        id: przelewy24
+                        name: Przelewy24
                       '60':
                         id: afterpay
                         name: AfterPay
                       '61':
                         id: directdebit
                         name: DirectDebit
-                      '66':
-                        id: bitcoin
-                        name: Bitcoin
-                      '73':
-                        id: idealqr
-                        name: iDEAL QR
-                      '79':
-                        id: onlineueberweisen
-                        name: OnlineÜberweisen
-                example-2:
-                  value:
                     success: true
-                    options:
-                      '{pt_id}':
-                        id: string
-                        name: string
       operationId: get-rest-v1-curo-paymenttypes-site_id
       description: 'The /rest/v1/curo/paymenttypes/site-id/ entry point lets you retrieve a list of enabled payment methods for the specified site. '
       parameters:
@@ -603,64 +648,141 @@ components:
     transaction-recurring-request:
       title: transaction-recurring-request
       type: object
+      description: /rest/v1/curo/recurring/
+      x-examples:
+        JSON example request:
+          site_id: 1234
+          transaction_id: T1234567890
+          amount: 100
+          currency_id: EUR
+          reference: SDD12345-05
+          description: Monthly payment 12345.
+          ip: 1.2.3.4
       properties:
         transaction_id:
           type: string
+          description: |-
+            Id of a previously succesful transaction ID with the recurring option enabled.
+            This is also referred to as the **Parent Transaction**, **Master Transaction** or **Referenced Transaction**.
+          maxLength: 12
         reference:
           type: string
+          description: Unique merchant identification for a transaction.
+          maxLength: 255
         amount:
           type: integer
+          description: The amount payable in cents (with no decimal separator).
+          maximum: 10
         currency_id:
           type: string
+          description: Only EUR is currently supported by SEPA.
+          maxLength: 3
         description:
           type: string
+          description: Recurring description.
+          maxLength: 128
         ip:
           type: string
+          description: |-
+            The real consumer IP if it is available.
+            >Please do not use your own (host) IP as this may cause it to be blocked or throttled!
+            Private IP ranges will also be refused by this API. Omit this field if you don't know the address, or use 0.0.0.0 to indicate unknown.
+          maxLength: 38
       required:
         - transaction_id
         - reference
         - amount
         - currency_id
         - description
-      description: ''
     transaction-recurring-response:
       title: transaction-recurring-response
       type: object
+      description: ''
+      x-examples:
+        example-1:
+          pmdata:
+            recipient_name: Escrow CURO Payments
+            recipient_iban: NL41INGB0687547407
+            recipient_bic: INGBNL2A
+            recipient_identifier: NL87ZZZ570002710000
+            amount: '100'
+            currency_id: EUR
+            mandate_id: T1234567893
+            mandate_date: '2014-05-22 14:26:34'
+            description: Description Recurring 1
+            execute_date: '2014-06-05'
+            sequence_type: RCUR
+            name: Test Persoon
+            iban: NL12TEST2A1234567890
+            bic: TEST2A
+          transaction_id: T1234567891
+          success: true
       properties:
         pmdata:
           type: object
           properties:
-            receipient_name:
+            recipient_name:
               type: string
-            receipient_iban:
+              description: Name of the recipient (Escrow CURO Payments).
+              maxLength: 64
+            recipient_iban:
               type: string
-            receipient_bic:
+              description: IBAN of the recipient.
+              maxLength: 34
+            recipient_bic:
               type: string
-            receipient_identifier:
+              description: BIC/SWIFT of the recipient.
+              maxLength: 10
+            recipient_identifier:
               type: string
+              description: Identification number of the recipient.
+              maxLength: 34
             amount:
               type: string
+              description: The amount payable in cents (with no decimal separator).
+              maxLength: 10
             currency_id:
               type: string
+              description: 'Currency in which payment should be effected, expressed using the three-letter international currency code as per ISO-4217. (default: EUR)'
+              maxLength: 3
             mandate_id:
               type: string
+              description: 'Transaction ID of the authorizing {{NAME}} payment.'
+              maxLength: 12
             mandate_date:
               type: string
+              description: Date when transaction will be debitted from the consumers account.
+              maxLength: 10
             description:
               type: string
+              description: Transaction description which will be presented to the user on the bank statement.
+              maxLength: 128
             execute_date:
               type: string
+              description: |-
+                Date when transaction will be debited from the consumers account.
+                >You are required to notify the consumer of the Direct Debit by e-mail or in writing at least 3 business-days before the executing date!
+              maxLength: 10
             sequence_type:
               type: string
+              description: 'The Type of sequence. (eg. FRST, RCUR)'
+              maxLength: 10
             name:
               type: string
+              description: The name of the consumer.
+              maxLength: 34
             iban:
               type: string
+              description: The IBAN number of the consumer.
+              maxLength: 34
             bic:
               type: string
+              description: The BIC code of the consumer.
+              maxLength: 34
         transaction_id:
           type: string
-      description: ''
+          description: Newly created transaction ID.
+          maxLength: 12
   securitySchemes:
     Authorization:
       type: http

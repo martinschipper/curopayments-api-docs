@@ -1,12 +1,6 @@
 title: Transaction Info - Ideal
 type: object
-x-examples:
-  example-1:
-    issuer: string
-    ideal_ref: string
-    consumer_name: string
-    consumer_iban: string
-    consumer_bic: string
+x-examples: {}
 properties:
   issuer:
     type: string

@@ -56,16 +56,18 @@ x-examples:
 properties:
   id:
     type: string
-    maxLength: 1
+    maxLength: 12
     description: Transaction ID.
   merchant_id:
     type: integer
-    maximum: 10
     description: Merchant’s ID.
+    exclusiveMaximum: true
+    maximum: 10000000000
   site_id:
     type: integer
-    maximum: 10
+    maximum: 10000000000
     description: Merchant’s site ID.
+    exclusiveMaximum: true
   site_name:
     type: string
     maxLength: 10
@@ -73,7 +75,8 @@ properties:
   code:
     type: integer
     description: Transaction status code.
-    maximum: 3
+    maximum: 1000
+    exclusiveMaximum: true
   country_id:
     type: string
     maxLength: 2
@@ -81,11 +84,12 @@ properties:
   currency_id:
     type: string
     maxLength: 3
-    description: "\tTransaction currency."
+    description: Transaction currency.
   amount:
     type: integer
-    maximum: 10
+    maximum: 10000000000
     description: The amount in cents (with no decimal separator).
+    exclusiveMaximum: true
   reference:
     type: string
     maxLength: 255
@@ -96,8 +100,8 @@ properties:
     description: Unique transaction_id or when it's a single payment 'master'
   payment_type_id:
     type: integer
-    maximum: 2
     description: ID of the payment type.
+    maximum: 100
   payment_type:
     type: string
     maxLength: 32
@@ -112,27 +116,13 @@ properties:
     description: Description for this transaction.
   status:
     type: integer
-    maximum: 10
+    maximum: 10000000000
     description: Transaction ID status code.
+    exclusiveMaximum: true
   timestamp:
     type: integer
   consumer:
     $ref: ./Consumer.v1.yaml
   info:
     type: object
-    properties:
-      '2':
-        type: string
-      cardnumber_masked:
-        type: string
-        description: If applicable.
-      reference:
-        type: string
-      consumer_name:
-        type: string
-      consumer_iban:
-        type: string
-      consumer_bic:
-        type: string
-      book_date:
-        type: string
+    description: This optional object will contain additional information from the payment method about this transaction.

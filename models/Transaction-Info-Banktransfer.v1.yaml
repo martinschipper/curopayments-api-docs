@@ -1,15 +1,6 @@
 title: Transaction Info - Banktransfer
 type: object
-x-examples:
-  example-1:
-    reference: string
-    consumer_name: string
-    consumer_iban: string
-    consumer_bic: string
-    book_date: string
-    receipient_name: string
-    receipient_iban: string
-    receipient_bic: string
+x-examples: {}
 properties:
   reference:
     type: string
