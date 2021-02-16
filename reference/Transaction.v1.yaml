@@ -32,10 +32,222 @@ paths:
           content:
             application/json:
               schema:
+                description: ''
                 type: object
                 properties:
+                  success:
+                    type: boolean
                   transaction:
-                    $ref: ../models/Transaction.v1.yaml
+                    type: object
+                    required:
+                      - merchant_id
+                      - site_id
+                      - site_name
+                      - code
+                      - country_id
+                      - currency_id
+                      - amount
+                      - reference
+                      - payment_type_id
+                      - payment_type
+                      - option
+                      - type
+                      - description
+                      - testmode
+                      - ip
+                      - registered
+                      - updated
+                      - finished
+                      - consumer
+                      - payouts
+                      - can_refund
+                      - refund_remainder
+                      - refund_extra_limit
+                      - id
+                    properties:
+                      merchant_id:
+                        type: string
+                        minLength: 1
+                      site_id:
+                        type: string
+                        minLength: 1
+                      site_name:
+                        type: string
+                        minLength: 1
+                      code:
+                        type: string
+                        minLength: 1
+                      country_id:
+                        type: string
+                        minLength: 1
+                      currency_id:
+                        type: string
+                        minLength: 1
+                      amount:
+                        type: string
+                        minLength: 1
+                      reference:
+                        type: string
+                        minLength: 1
+                      parent_transaction_id: {}
+                      payment_type_id:
+                        type: string
+                        minLength: 1
+                      payment_type:
+                        type: string
+                        minLength: 1
+                      option:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      info:
+                        type: object
+                        properties:
+                          issuer:
+                            type: string
+                            minLength: 1
+                          ideal_ref: {}
+                          consumer_name:
+                            type: string
+                            minLength: 1
+                          consumer_iban:
+                            type: string
+                            minLength: 1
+                          consumer_bic:
+                            type: string
+                            minLength: 1
+                      testmode:
+                        type: string
+                        minLength: 1
+                      ip:
+                        type: string
+                        minLength: 1
+                      registered:
+                        type: string
+                        minLength: 1
+                      updated:
+                        type: string
+                        minLength: 1
+                      finished:
+                        type: string
+                        minLength: 1
+                      consumer:
+                        type: object
+                        required:
+                          - name
+                          - firstname
+                          - lastname
+                          - email
+                          - address
+                          - street
+                          - housenumber
+                          - city
+                          - zipcode
+                          - country_id
+                          - phone
+                          - shipto_name
+                          - shipto_firstname
+                          - shipto_lastname
+                          - shipto_address
+                          - shipto_street
+                          - shipto_housenumber
+                          - shipto_city
+                          - shipto_zipcode
+                          - shipto_country_id
+                          - account_name
+                          - account_number
+                          - account_code
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                          firstname:
+                            type: string
+                            minLength: 1
+                          lastname:
+                            type: string
+                            minLength: 1
+                          email:
+                            type: string
+                            minLength: 1
+                          address:
+                            type: string
+                            minLength: 1
+                          street:
+                            type: string
+                            minLength: 1
+                          housenumber:
+                            type: string
+                            minLength: 1
+                          city:
+                            type: string
+                            minLength: 1
+                          zipcode:
+                            type: string
+                            minLength: 1
+                          country_id:
+                            type: string
+                            minLength: 1
+                          phone:
+                            type: string
+                            minLength: 1
+                          shipto_name:
+                            type: string
+                            minLength: 1
+                          shipto_firstname:
+                            type: string
+                            minLength: 1
+                          shipto_lastname:
+                            type: string
+                            minLength: 1
+                          shipto_address:
+                            type: string
+                            minLength: 1
+                          shipto_street:
+                            type: string
+                            minLength: 1
+                          shipto_housenumber:
+                            type: string
+                            minLength: 1
+                          shipto_city:
+                            type: string
+                            minLength: 1
+                          shipto_zipcode:
+                            type: string
+                            minLength: 1
+                          shipto_country_id:
+                            type: string
+                            minLength: 1
+                          account_name:
+                            type: string
+                            minLength: 1
+                          account_number:
+                            type: string
+                            minLength: 1
+                          account_code:
+                            type: string
+                            minLength: 1
+                      payouts:
+                        type: array
+                        items:
+                          type: object
+                      can_refund:
+                        type: boolean
+                      refund_remainder:
+                        type: number
+                      refund_extra_limit:
+                        type: number
+                      id:
+                        type: string
+                        minLength: 1
+                required:
+                  - success
+                  - transaction
               examples:
                 Example:
                   value:
@@ -301,6 +513,477 @@ paths:
               examples:
                 XML Request Example:
                   value: "<response>\n\t<transaction>\n\t\t<merchant_id>1</merchant_id>\n\t\t<site_id>123</site_id>\n\t\t<site_name>Test Site</site_name>\n\t\t<code>200</code>\n\t\t<country_id>NL</country_id>\n\t\t<currency_id>EUR</currency_id>\n\t\t<amount>100</amount>\n\t\t<reference>O1234567890</reference>\n\t\t<parent_transaction_id>master</parent_transaction_id>\n\t\t<payment_type_id>18</payment_type_id>\n\t\t<payment_type>iDeal</payment_type>\n\t\t<type/>\n\t\t<description>Order 1</description>\n\t\t<info>\n\t\t\t<issuer>Issuer Simulation V3 - ING</issuer>\n\t\t\t<ideal_ref>0050000110234217</ideal_ref>\n\t\t\t<consumer_name>Hr E G H Küppers en/of MW M.J. K</consumer_name>\n\t\t\t<consumer_iban>NL53INGB0654422370</consumer_iban>\n\t\t\t<consumer_bic>INGBNL2A</consumer_bic>\n\t\t</info>\n\t\t<testmode>1</testmode>\n\t\t<ip>192.168.1.1</ip>\n\t\t<registered>2016-01-01 11:50:20</registered>\n\t\t<updated>2016-01-01 11:50:26</updated>\n\t\t<finished>2016-01-01 11:50:26</finished>\n\t\t<consumer>\n\t\t\t<name>John Doe</name>\n\t\t\t<firstname>John</firstname>\n\t\t\t<lastname>Doe</lastname>\n\t\t\t<email>john@doe.com</email>\n\t\t\t<address>nowhereroad 12</address>\n\t\t\t<street>nowhereroad</street>\n\t\t\t<housenumber>12</housenumber>\n\t\t\t<city>NonVille</city>\n\t\t\t<zipcode>12345</zipcode>\n\t\t\t<country_id>NL</country_id>\n\t\t\t<phone></phone>\n\t\t\t<account_name>Hr E G H Küppers en/of MW M.J. Küppers-Veeneman</account_name>\n\t\t\t<account_number>NL53INGB0654422370</account_number>\n\t\t\t<account_code>INGBNL2A</account_code>\n\t\t</consumer>\n\t\t<payouts/>\n\t\t<id>T1234567890</id>\n\t</transaction>\n\t<success>true</success>\n</response>"
+            application/soap+xml:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  transaction:
+                    type: object
+                    properties:
+                      merchant_id:
+                        type: string
+                        minLength: 1
+                      site_id:
+                        type: string
+                        minLength: 1
+                      site_name:
+                        type: string
+                        minLength: 1
+                      code:
+                        type: string
+                        minLength: 1
+                      country_id:
+                        type: string
+                        minLength: 1
+                      currency_id:
+                        type: string
+                        minLength: 1
+                      amount:
+                        type: string
+                        minLength: 1
+                      reference:
+                        type: string
+                        minLength: 1
+                      parent_transaction_id: {}
+                      payment_type_id:
+                        type: string
+                        minLength: 1
+                      payment_type:
+                        type: string
+                        minLength: 1
+                      option:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      info:
+                        type: object
+                        properties:
+                          issuer:
+                            type: string
+                            minLength: 1
+                          ideal_ref: {}
+                          consumer_name:
+                            type: string
+                            minLength: 1
+                          consumer_iban:
+                            type: string
+                            minLength: 1
+                          consumer_bic:
+                            type: string
+                            minLength: 1
+                        required:
+                          - issuer
+                          - consumer_name
+                          - consumer_iban
+                          - consumer_bic
+                      testmode:
+                        type: string
+                        minLength: 1
+                      ip:
+                        type: string
+                        minLength: 1
+                      registered:
+                        type: string
+                        minLength: 1
+                      updated:
+                        type: string
+                        minLength: 1
+                      finished:
+                        type: string
+                        minLength: 1
+                      consumer:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                          firstname:
+                            type: string
+                            minLength: 1
+                          lastname:
+                            type: string
+                            minLength: 1
+                          email:
+                            type: string
+                            minLength: 1
+                          address:
+                            type: string
+                            minLength: 1
+                          street:
+                            type: string
+                            minLength: 1
+                          housenumber:
+                            type: string
+                            minLength: 1
+                          city:
+                            type: string
+                            minLength: 1
+                          zipcode:
+                            type: string
+                            minLength: 1
+                          country_id:
+                            type: string
+                            minLength: 1
+                          phone:
+                            type: string
+                            minLength: 1
+                          shipto_name:
+                            type: string
+                            minLength: 1
+                          shipto_firstname:
+                            type: string
+                            minLength: 1
+                          shipto_lastname:
+                            type: string
+                            minLength: 1
+                          shipto_address:
+                            type: string
+                            minLength: 1
+                          shipto_street:
+                            type: string
+                            minLength: 1
+                          shipto_housenumber:
+                            type: string
+                            minLength: 1
+                          shipto_city:
+                            type: string
+                            minLength: 1
+                          shipto_zipcode:
+                            type: string
+                            minLength: 1
+                          shipto_country_id:
+                            type: string
+                            minLength: 1
+                          account_name:
+                            type: string
+                            minLength: 1
+                          account_number:
+                            type: string
+                            minLength: 1
+                          account_code:
+                            type: string
+                            minLength: 1
+                        required:
+                          - name
+                          - firstname
+                          - lastname
+                          - email
+                          - address
+                          - street
+                          - housenumber
+                          - city
+                          - zipcode
+                          - country_id
+                          - phone
+                          - shipto_name
+                          - shipto_firstname
+                          - shipto_lastname
+                          - shipto_address
+                          - shipto_street
+                          - shipto_housenumber
+                          - shipto_city
+                          - shipto_zipcode
+                          - shipto_country_id
+                          - account_name
+                          - account_number
+                          - account_code
+                      payouts:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      can_refund:
+                        type: boolean
+                      refund_remainder:
+                        type: number
+                      refund_extra_limit:
+                        type: number
+                      id:
+                        type: string
+                        minLength: 1
+                    required:
+                      - merchant_id
+                      - site_id
+                      - site_name
+                      - code
+                      - country_id
+                      - currency_id
+                      - amount
+                      - reference
+                      - payment_type_id
+                      - payment_type
+                      - option
+                      - type
+                      - description
+                      - info
+                      - testmode
+                      - ip
+                      - registered
+                      - updated
+                      - finished
+                      - consumer
+                      - payouts
+                      - can_refund
+                      - refund_remainder
+                      - refund_extra_limit
+                      - id
+                required:
+                  - success
+                  - transaction
+            application/xml-dtd:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  transaction:
+                    type: object
+                    properties:
+                      merchant_id:
+                        type: number
+                      site_id:
+                        type: number
+                      site_name:
+                        type: string
+                        minLength: 1
+                      code:
+                        type: number
+                      country_id:
+                        type: string
+                        minLength: 1
+                      currency_id:
+                        type: string
+                        minLength: 1
+                      amount:
+                        type: number
+                      reference:
+                        type: string
+                        minLength: 1
+                      parent_transaction_id:
+                        type: string
+                      payment_type_id:
+                        type: number
+                      payment_type:
+                        type: string
+                        minLength: 1
+                      option:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      info:
+                        type: object
+                        properties:
+                          issuer:
+                            type: string
+                            minLength: 1
+                          ideal_ref: {}
+                          consumer_name:
+                            type: string
+                            minLength: 1
+                          consumer_iban:
+                            type: string
+                            minLength: 1
+                          consumer_bic:
+                            type: string
+                            minLength: 1
+                        required:
+                          - issuer
+                          - consumer_name
+                          - consumer_iban
+                          - consumer_bic
+                      testmode:
+                        type: string
+                        minLength: 1
+                      ip:
+                        type: string
+                        minLength: 1
+                      registered:
+                        type: string
+                        minLength: 1
+                      updated:
+                        type: string
+                        minLength: 1
+                      finished:
+                        type: string
+                        minLength: 1
+                      consumer:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                          firstname:
+                            type: string
+                            minLength: 1
+                          lastname:
+                            type: string
+                            minLength: 1
+                          email:
+                            type: string
+                            minLength: 1
+                          address:
+                            type: string
+                            minLength: 1
+                          street:
+                            type: string
+                            minLength: 1
+                          housenumber:
+                            type: string
+                            minLength: 1
+                          city:
+                            type: string
+                            minLength: 1
+                          zipcode:
+                            type: string
+                            minLength: 1
+                          country_id:
+                            type: string
+                            minLength: 1
+                          phone:
+                            type: string
+                            minLength: 1
+                          shipto_name:
+                            type: string
+                            minLength: 1
+                          shipto_firstname:
+                            type: string
+                            minLength: 1
+                          shipto_lastname:
+                            type: string
+                            minLength: 1
+                          shipto_address:
+                            type: string
+                            minLength: 1
+                          shipto_street:
+                            type: string
+                            minLength: 1
+                          shipto_housenumber:
+                            type: string
+                            minLength: 1
+                          shipto_city:
+                            type: string
+                            minLength: 1
+                          shipto_zipcode:
+                            type: string
+                            minLength: 1
+                          shipto_country_id:
+                            type: string
+                            minLength: 1
+                          account_name:
+                            type: string
+                            minLength: 1
+                          account_number:
+                            type: string
+                            minLength: 1
+                          account_code:
+                            type: string
+                            minLength: 1
+                        required:
+                          - name
+                          - firstname
+                          - lastname
+                          - email
+                          - address
+                          - street
+                          - housenumber
+                          - city
+                          - zipcode
+                          - country_id
+                          - phone
+                          - shipto_name
+                          - shipto_firstname
+                          - shipto_lastname
+                          - shipto_address
+                          - shipto_street
+                          - shipto_housenumber
+                          - shipto_city
+                          - shipto_zipcode
+                          - shipto_country_id
+                          - account_name
+                          - account_number
+                          - account_code
+                      payouts:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          required:
+                            - payout_type_id
+                            - type_description
+                            - currency
+                            - amount
+                            - due_date
+                          properties:
+                            payout_type_id:
+                              type: string
+                              minLength: 1
+                            type_description:
+                              type: string
+                              minLength: 1
+                            currency:
+                              type: string
+                              minLength: 1
+                            amount:
+                              type: string
+                              minLength: 1
+                            due_date:
+                              type: string
+                              minLength: 1
+                            invoice_number: {}
+                            invoice_date: {}
+                      can_refund:
+                        type: boolean
+                      refund_remainder:
+                        type: number
+                      refund_extra_limit:
+                        type: number
+                      id:
+                        type: string
+                        minLength: 1
+                    required:
+                      - merchant_id
+                      - site_id
+                      - site_name
+                      - code
+                      - country_id
+                      - currency_id
+                      - amount
+                      - reference
+                      - parent_transaction_id
+                      - payment_type_id
+                      - payment_type
+                      - option
+                      - type
+                      - description
+                      - info
+                      - testmode
+                      - ip
+                      - registered
+                      - updated
+                      - finished
+                      - consumer
+                      - payouts
+                      - can_refund
+                      - refund_remainder
+                      - refund_extra_limit
+                      - id
+                required:
+                  - success
+                  - transaction
         '401':
           $ref: '#/components/responses/UnauthorizedError'
       operationId: get-rest-v1-curo-transaction-transaction_id
@@ -323,8 +1006,9 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-            examples: {}
+            examples:
+              example-1:
+                value: {}
   /rest/v1/curo/capture:
     parameters: []
     post:
@@ -342,7 +1026,7 @@ paths:
               properties:
                 transaction_id:
                   type: string
-                  description: Transaction id to be cancelled.
+                  description: Transaction id to be captured.
                   maxLength: 12
                 description:
                   type: string
@@ -367,6 +1051,36 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  cancel:
+                    type: object
+                    properties:
+                      transaction:
+                        type: string
+                        minLength: 1
+                      transaction_id:
+                        type: string
+                        minLength: 1
+                    required:
+                      - transaction
+                      - transaction_id
+                required:
+                  - success
+                  - cancel
+              examples:
+                example-1:
+                  value:
+                    success: true
+                    cancel:
+                      transaction: T21256005399
+                      transaction_id: T21256005399
       description: 'A transaction can be cancelled in the back-office, or by using this entry point.'
       requestBody:
         content:
@@ -423,26 +1137,98 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/transaction-recurring-response'
+                description: ''
+                type: object
+                properties:
+                  pmdata:
+                    type: object
+                    properties:
+                      recipient_name:
+                        type: string
+                        minLength: 1
+                      recipient_iban:
+                        type: string
+                        minLength: 1
+                      recipient_bic:
+                        type: string
+                        minLength: 1
+                      recipient_identifier:
+                        type: string
+                        minLength: 1
+                      amount:
+                        type: string
+                        minLength: 1
+                      currency_id:
+                        type: string
+                        minLength: 1
+                      mandate_id:
+                        type: string
+                        minLength: 1
+                      mandate_date:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      execute_date:
+                        type: string
+                        minLength: 1
+                      sequence_type:
+                        type: string
+                        minLength: 1
+                      name:
+                        type: string
+                        minLength: 1
+                      iban:
+                        type: string
+                        minLength: 1
+                      bic:
+                        type: string
+                        minLength: 1
+                    required:
+                      - recipient_name
+                      - recipient_iban
+                      - recipient_bic
+                      - recipient_identifier
+                      - amount
+                      - currency_id
+                      - mandate_id
+                      - mandate_date
+                      - description
+                      - execute_date
+                      - sequence_type
+                      - name
+                      - iban
+                      - bic
+                  transaction_id:
+                    type: string
+                    minLength: 1
+                  success:
+                    type: boolean
+                required:
+                  - pmdata
+                  - transaction_id
+                  - success
               examples:
                 example-1:
                   value:
                     pmdata:
-                      recipient_name: string
-                      recipient_iban: string
-                      recipient_bic: string
-                      recipient_identifier: string
-                      amount: string
-                      currency_id: str
-                      mandate_id: string
-                      mandate_date: string
-                      description: string
-                      execute_date: string
-                      sequence_type: string
-                      name: string
-                      iban: string
-                      bic: string
-                    transaction_id: string
+                      recipient_name: Escrow CURO Payments
+                      recipient_iban: NL41INGB0687547407
+                      recipient_bic: INGBNL2A
+                      recipient_identifier: NL87ZZZ570002710000
+                      amount: '100'
+                      currency_id: EUR
+                      mandate_id: T1234567893
+                      mandate_date: '2014-05-22 14:26:34'
+                      description: Description Recurring 1
+                      execute_date: '2014-06-05'
+                      sequence_type: RCUR
+                      name: Test Persoon
+                      iban: NL12TEST2A1234567890
+                      bic: TEST2A
+                    transaction_id: T1234567891
+                    success: true
             application/xml:
               schema:
                 type: object
@@ -465,16 +1251,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/transaction-recurring-request'
+              description: ''
+              type: object
+              properties:
+                site_id:
+                  type: number
+                transaction_id:
+                  type: string
+                  minLength: 1
+                amount:
+                  type: number
+                currency_id:
+                  type: string
+                  minLength: 1
+                reference:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                ip:
+                  type: string
+                  minLength: 1
+              required:
+                - site_id
+                - transaction_id
+                - amount
+                - currency_id
+                - reference
+                - description
+                - ip
             examples:
               example-1:
                 value:
-                  transaction_id: string
-                  reference: string
-                  amount: 0
-                  currency_id: str
-                  description: string
-                  ip: string
+                  site_id: 1234
+                  transaction_id: T1234567890
+                  amount: 100
+                  currency_id: EUR
+                  reference: SDD12345-05
+                  description: Monthly payment 12345.
+                  ip: 1.2.3.4
           application/xml:
             schema:
               type: object
