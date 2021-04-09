@@ -3,19 +3,25 @@ type: object
 properties:
   error_code:
     type: integer
-    description: "Error code, where 0 is OK and else it's the error code"
+    description: 'Error code, where 0 is OK and else it''s the error code'
+    maximum: 3
   error_messages:
     type: string
     description: Short description of the error
+    maxLength: 32
   token:
     type: string
     description: Unique transaction ID (Token)
+    maxLength: 32
   email:
     type: string
     description: Consumer’s email-address
+    maxLength: 32
   order_id:
     type: string
     description: Transaction number received from Przelewy24
+    maxLength: 32
   method:
     type: integer
     description: Payment method ID used by the Client
+    maximum: 2

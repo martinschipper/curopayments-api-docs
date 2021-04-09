@@ -1,27 +1,100 @@
 title: CartItem model
 type: object
+description: ''
+x-examples:
+  Request for JSON payment request including cartitems:
+    site_id: '123'
+    currency_id: EUR
+    amount: '100'
+    reference: Reference 1
+    description: Description 1
+    url_success: 'http://www.example.com/ok.html'
+    url_pending: 'http://www.example.com/pending.html'
+    url_failure: 'http://www.example.com/wrong.html'
+    url_callback: 'http://www.example.com/callback.html'
+    issuer_id: RABONL2U
+    country_id: NL
+    language_id: nl
+    ip: 1.2.3.4
+    consumer:
+      firstname: Testperson-nl
+      lastname: Approved
+      email: demo@domain.tld
+      address: Neherkade 1XI
+      city: Gravenhage
+      zipcode: 2521VA
+      country_id: NL
+      phone: '0612345678'
+      dob: 10-07-1970
+      gender: m
+    cartitems:
+      - quantity: 1
+        sku: spijkers_01
+        name: Spijkers
+        price: 150
+        vat: 21
+        vat_inc: true
+        type: 1
+      - quantity: 1
+        sku: Discount
+        name: Discount total
+        price: -50
+        vat: 21
+        vat_inc: true
+        type: 4
 properties:
   quantity:
     type: integer
+    description: Quantity **1** is used if no value is specified.
+    maximum: 5
   sku:
     type: string
+    description: Article number/Stock Keeping Unit
+    maxLength: 64
   name:
     type: string
+    description: Article name/description
+    maxLength: 64
   price:
     type: integer
+    description: Article price per item **in cents**
+    maximum: 10
   vat:
     type: number
+    description: VAT percentage
+    maximum: 10.2
   vat_amount:
     type: integer
+    description: |-
+      VAT amount included/excluded in the price per item **in cents**
+
+      **NB** when this is omitted it will be calculated automatically, however for prices **excluding** VAT rounding errors may occur which will result in a transaction failure for Klarna or Afterpay!
+    maximum: 10
   vat_inc:
     type: boolean
+    description: |-
+      Specify wether prices are in- or excluding VAT:
+      * **0** excluding VAT `default`
+      * **1** including VAT
   type:
     type: integer
+    description: |-
+      Specify type of item:
+      * **1** normal product `default`
+      * **2** shipping costs
+      * **3** administrative costs `not used by Klarna`
+      * **4** discounts
+      * **5** handling costs
+    maximum: 1
   stock:
     type: integer
+    description: |-
+      Amount in stock for this article. Specify this to prevent auto-capture of an order if items are out of stock.
+
+      **NB** you must completely omit this parameter if you don't want or need stock checking! Else the stock value might become **0** which will prevent auto-captures.
+    maximum: 5
 required:
   - sku
   - name
   - price
   - vat
-description: ''

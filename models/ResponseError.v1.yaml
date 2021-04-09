@@ -1,17 +1,29 @@
 title: ResponseError
 type: object
+description: 'See [Response Documentation](../../docs/Curopayments+API/Responses.md)'
+x-examples: {}
 properties:
   '{requestSpecific}':
     type: object
   error:
     type: object
+    description: Response container for all error elements.
     properties:
       code:
         type: string
+        description: 'The error code is a string that uniquely identifies an error condition. It is meant to be read and understood by programs that detect and handle errors by type. For more information, see List of Error Codes.'
+        maxLength: 48
       message:
         type: string
+        description: |-
+          The error message contains a generic description of the error condition in English. It is intended for a human audience. Simple programs display the message directly to the end user if they encounter an error condition they don't know how or don't care to handle. 
+
+          Sophisticated programs with more exhaustive error handling and proper internationalization are more likely to ignore the error message.
+        maxLength: 255
   success:
-    type: string
+    description: TRUE or FALSE indicating the result of the call
+    type: boolean
   warning:
     type: string
-description: 'See [Response Documentation](../../docs/Curopayments+API/Responses.md)'
+    description: 'English message depending on context, mostly about optional/missing data.'
+    maxLength: 255

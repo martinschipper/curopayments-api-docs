@@ -3,19 +3,35 @@ type: object
 properties:
   result_code:
     type: string
-    description: "Result code, where 0 is OK and else it's the error code"
+    description: 'Result code, where 0 is OK and else it''s the error code'
+    maxLength: 5
   card_holder:
     type: string
-    description: "Card holder's name"
+    description: Card holder's name
+    maxLength: 32
   card_company:
     type: string
     description: Card company name
+    maxLength: 32
   account_number:
     type: string
     description: Account number (masked)
+    maxLength: 16
   card_brand:
     type: string
     description: Credit card brand
+    maxLength: 32
   card_secure:
     type: string
-    description: "Shows whether transaction is 3D-Secure. Values 'Yes' or 'No'. \nThe value between () means:\n\nU = unknown\n\nYes = merchant is liable\n\nNo = issuer/bank is liable\n\nXML example result: <card_secure>No (U)</card_secure>"
+    description: |-
+      Shows whether transaction is 3D-Secure. Values 'Yes' or 'No'. 
+      The value between () means:
+
+      U = unknown
+
+      Yes = merchant is liable
+
+      No = issuer/bank is liable
+
+      XML example result: <card_secure>No (U)</card_secure>
+    maxLength: 3

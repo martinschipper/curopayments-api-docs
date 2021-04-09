@@ -1,7 +1,8 @@
 title: Transaction Info - Bancontact
 type: object
+description: ''
 properties:
   cardnumber_masked:
     type: string
     description: Card number (masked)
-description: ''
+    maxLength: 16

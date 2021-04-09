@@ -1,18 +1,24 @@
 title: Transaction Info - Ideal
 type: object
+x-examples: {}
 properties:
   issuer:
     type: string
     description: iDEAL Issuer/Bank
+    maxLength: 32
   ideal_ref:
     type: string
     description: iDEAL reference
+    maxLength: 32
   consumer_name:
     type: string
     description: Consumer’s first and last name combined
+    maxLength: 32
   consumer_iban:
     type: string
     description: Account IBAN number
+    maxLength: 32
   consumer_bic:
     type: string
     description: Account BIC Code
+    maxLength: 10

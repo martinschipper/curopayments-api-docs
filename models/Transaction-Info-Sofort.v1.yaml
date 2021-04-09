@@ -4,21 +4,28 @@ properties:
   reference:
     type: integer
     description: Reference from Sofort
+    maximum: 5
   description:
     type: string
     description: Your own description
+    maxLength: 5
   consumer_name:
     type: string
     description: Consumer’s first and last name combined
+    maxLength: 32
   consumer_iban:
     type: string
     description: Account IBAN number
+    maxLength: 32
   consumer_bic:
     type: string
     description: Account BIC Code
+    maxLength: 10
   bank_code:
     type: integer
     description: Bank Code
+    maximum: 5
   book_date:
     type: string
     description: Book date of the transaction
+    maxLength: 20

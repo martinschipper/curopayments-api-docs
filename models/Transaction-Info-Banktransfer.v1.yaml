@@ -1,27 +1,37 @@
 title: Transaction Info - Banktransfer
 type: object
+x-examples: {}
 properties:
   reference:
     type: string
     description: 'Reference (the value is usualy: MANUAL)'
+    maxLength: 5
   consumer_name:
     type: string
     description: Consumer’s first and last name combined
+    maxLength: 32
   consumer_iban:
     type: string
     description: Account IBAN number
+    maxLength: 32
   consumer_bic:
     type: string
     description: Account BIC Code
+    maxLength: 10
+    format: date
   book_date:
     type: string
     description: Book date of the transaction
+    maxLength: 10
   receipient_name:
     type: string
     description: (Company) Name of the recipient
+    maxLength: 32
   receipient_iban:
     type: string
     description: Account IBAN number of the recipient
+    maxLength: 20
   receipient_bic:
     type: string
     description: Account BIC Code of the recipient
+    maxLength: 10

@@ -1,50 +1,96 @@
 title: Consumer model
 type: object
+description: ''
 properties:
   firstname:
     type: string
+    maxLength: 32
+    description: Consumer’s first name.
   lastname:
     type: string
+    maxLength: 64
+    description: Consumer’s last name.
   name:
     type: string
+    description: ''
   company:
     type: string
+    maxLength: 64
+    description: Consumer’s company name.
   address:
     type: string
+    maxLength: 128
+    description: Consumer’s address.
   street:
     type: string
+    description: ''
+    maxLength: 128
   housenumber:
     type: string
   city:
     type: string
+    maxLength: 128
+    description: Consumer’s city.
   zipcode:
     type: string
+    maxLength: 16
+    description: Consumer’s postal code.
   country_id:
     type: string
+    maxLength: 2
+    description: 'Two letter country code of a consumer, according to ISO-3166.'
   phone:
     type: string
+    maxLength: 16
+    description: Consumer’s phone number.
   email:
     type: string
+    maxLength: 64
+    description: Consumer’s email address.
   shipto_firstname:
     type: string
+    maxLength: 32
+    description: Ship to first name.
   shipto_initials:
     type: string
+    maxLength: 64
+    description: Ship to initials.
   shipto_lastname:
     type: string
+    maxLength: 64
+    description: Ship to last name.
   shipto_gender:
     type: string
+    maxLength: 64
+    description: Ship to gender (F or M).
   shipto_dob:
     type: string
+    maxLength: 64
+    description: Ship to date of birth (YYYYMMDD or DD-MM-YYYY).
   shipto_company:
     type: string
+    maxLength: 128
+    description: Ship to company.
   shipto_address:
     type: string
+    maxLength: 128
+    description: Ship to address.
   shipto_city:
     type: string
+    maxLength: 128
+    description: Ship to city.
   shipto_state:
     type: string
+    maxLength: 32
+    description: Ship to state.
   shipto_zipcode:
     type: string
+    maxLength: 16
+    description: Ship to postal code.
   shipto_country_id:
     type: string
-description: ''
+    maxLength: 2
+    description: 'Two letter country code of a consumer, according to ISO-3166.'
+required:
+  - firstname
+  - lastname

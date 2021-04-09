@@ -1,63 +1,128 @@
 title: Transaction model
 type: object
-description: 
-  "This section provides reference information about payment transactions.  \n\n
-  Every payment request in the API will generate a new Transaction.  \n
-  Each Transaction is uniquely identified by a CURO Transaction ID (transaction_id): `TYYM12345678`.  \n\n
-  > \n`T` from \"Transaction\".  \n`YY` year number.\n`M` month as hexadecimal (1-9, A=10, B=11, C=12).  \n`12345678` 8 digit unique number.  \nThe total length is always 12 characters\n\nYou are required to provide a Transaction Reference (reference) to indentify this transaction in your own system.\n\nPlease see Transaction Flow for a schematic overview of the standard transaction processing.\n\nTransactions can have several status codes during its lifetime, the complete list of Status Codes is shown below.\nA Transaction is considered to be “Completed” (final) if the status code is in the 2XX range (200 or 210 mostly)."
+description: ''
+x-tags:
+  - transaction
+x-examples:
+  example-1:
+    id: string
+    merchant_id: 0
+    site_id: 0
+    site_name: string
+    code: 0
+    country_id: string
+    currency_id: string
+    amount: 0
+    reference: string
+    parent_transaction_id: string
+    payment_type_id: 0
+    payment_type: string
+    type: string
+    description: string
+    status: 0
+    timestamp: 0
+    consumer:
+      firstname: string
+      lastname: string
+      name: string
+      company: string
+      address: string
+      street: string
+      housenumber: string
+      city: string
+      zipcode: string
+      country_id: string
+      phone: string
+      email: string
+      shipto_firstname: string
+      shipto_initials: string
+      shipto_lastname: string
+      shipto_gender: string
+      shipto_dob: string
+      shipto_company: string
+      shipto_address: string
+      shipto_city: string
+      shipto_state: string
+      shipto_zipcode: string
+      shipto_country_id: string
+    info:
+      cardnumber_masked: string
+      reference: string
+      consumer_name: string
+      consumer_iban: string
+      consumer_bic: string
+      book_date: string
+      '': string
 properties:
   id:
     type: string
+    maxLength: 12
+    description: Transaction ID.
   merchant_id:
     type: integer
+    description: Merchant’s ID.
+    exclusiveMaximum: true
+    maximum: 10000000000
   site_id:
     type: integer
+    maximum: 10000000000
+    description: Merchant’s site ID.
+    exclusiveMaximum: true
   site_name:
     type: string
+    maxLength: 10
+    description: Merchant’s site name.
   code:
     type: integer
-    description: Transaction status code
+    description: Transaction status code.
+    maximum: 1000
+    exclusiveMaximum: true
   country_id:
     type: string
+    maxLength: 2
+    description: Country code.
   currency_id:
     type: string
+    maxLength: 3
+    description: Transaction currency.
   amount:
     type: integer
+    maximum: 10000000000
+    description: The amount in cents (with no decimal separator).
+    exclusiveMaximum: true
   reference:
     type: string
+    maxLength: 255
+    description: Unique merchant identification for a transaction.
   parent_transaction_id:
     type: string
+    maxLength: 12
+    description: Unique transaction_id or when it's a single payment 'master'
   payment_type_id:
     type: integer
+    description: ID of the payment type.
+    maximum: 100
   payment_type:
     type: string
+    maxLength: 32
+    description: Name of the payment type.
   type:
     type: string
+    maxLength: 32
+    description: 'Type of the payment (eg. payment, refund, etc.).'
   description:
     type: string
+    maxLength: 32
+    description: Description for this transaction.
   status:
     type: integer
+    maximum: 10000000000
+    description: Transaction ID status code.
+    exclusiveMaximum: true
   timestamp:
     type: integer
   consumer:
     $ref: ./Consumer.v1.yaml
   info:
     type: object
-    properties:
-      cardnumber_masked:
-        type: string
-        description: If applicable
-      reference:
-        type: string
-      consumer_name:
-        type: string
-      consumer_iban:
-        type: string
-      consumer_bic:
-        type: string
-      book_date:
-        type: string
-      '':
-        type: string
-x-tags:
-  - transaction
+    description: This optional object will contain additional information from the payment method about this transaction.
